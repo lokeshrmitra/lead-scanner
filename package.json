@@ -1,0 +1,11 @@
+{
+  "name": "scan-to-lead",
+  "version": "1.0.0",
+  "description": "An app that scans business cards to create leads in Salesforce",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhijeet Saxena",
+  "license": "MIT"
+}
