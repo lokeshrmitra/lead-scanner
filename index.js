@@ -1,1 +1,13 @@
-console.log("Some Welcome message");
+const express = require("express");
+
+const app = express();
+
+const port = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send("This is me");
+});
+
+app.listen(port, () => {
+  console.log("Server running on 3000");
+});
