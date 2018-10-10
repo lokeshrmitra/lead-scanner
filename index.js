@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const ejs = require("ejs");
 const path = require("path");
+const fetch = require("node-fetch");
 
 //Set Storage Engine
 const storage = multer.diskStorage({
@@ -26,7 +27,9 @@ app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    text: process.env.sample_key
+  });
 });
 
 app.post("/upload", (req, res) => {
@@ -38,10 +41,40 @@ app.post("/upload", (req, res) => {
           msg: "No File uploaded"
         });
       } else {
-        res.render("index", {
-          msg: "file uploaded",
-          file: `uploads/${req.file.filename}`
-        });
+        // Getting data from Google Vision API
+        console.log(req.file.filename);
+
+        var url =
+          "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCxQPGs4zmsYOnLl48SndoEIH9PoDpl_HU";
+        var data = {
+          requests: [
+            {
+              image: {
+                source: {
+                  imageUri:
+                    "https://image.ibb.co/jCtjWz/Whats_App_Image_2018_09_28_at_2_10_52_AM.jpg"
+                }
+              },
+              features: [
+                {
+                  type: "TEXT_DETECTION"
+                }
+              ]
+            }
+          ]
+        };
+        fetch(url, { method: "POST", body: JSON.stringify(data) })
+          .then(res => res.json())
+          .then(json => {
+            // console.log(JSON.stringify(json));
+            let resp = JSON.stringify(json);
+            console.log(resp.responses);
+            res.render("index", {
+              msg: "file uploaded",
+              file: `uploads/${req.file.filename}`
+              //   text: JSON.parse(json)
+            });
+          });
       }
     }
   });
