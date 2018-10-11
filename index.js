@@ -1,8 +1,10 @@
 const express = require("express");
 const multer = require("multer");
-const ejs = require("ejs");
 const path = require("path");
-const fetch = require("node-fetch");
+const hbs = require("express-handlebars");
+const bodyParser = require("body-parser");
+
+global.loggedInUser = { user: null };
 
 //Set Storage Engine
 const storage = multer.diskStorage({
@@ -19,65 +21,79 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage
   //   limits: { fileSize: 10 }
-}).single("avatar");
+}).single("bcard");
 
 const app = express();
 
-app.set("view engine", "ejs");
-app.use(express.static("./public"));
+app.set("view engine", "hbs");
+app.set("views", __dirname + "/views/pages");
+
+app.engine(
+  "hbs",
+  hbs({
+    extname: "hbs",
+    defaultLayout: "main"
+  })
+);
+
+app.use(express.static(__dirname + "/public"));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.post("/login", (req, res) => {
+  console.log(req.body.user);
+  console.log(req.body.pwd);
+  console.log(global.loggedInUser);
+  global.loggedInUser.user = req.body.user;
+  console.log(global.loggedInUser);
+
+  res.render("home", { title: "Home", user: req.body.user });
+});
+
+app.get("/login", (req, res) => {
+  res.render("login", { title: "Login" });
+});
 
 app.get("/", (req, res) => {
-  res.render("index", {
-    text: process.env.sample_key
-  });
+  res.render("home", { title: "Home" });
+});
+
+app.get("/create-lead", (req, res) => {
+  res.render("createlead", { title: "Create Lead", data: "some text" });
+});
+
+app.get("*", function(req, res) {
+  res.render("redirect", { title: "Dead End" });
 });
 
 app.post("/upload", (req, res) => {
-  upload(req, res, err => {
-    if (err) res.render("index", { msg: err });
-    else {
-      if (req.file == undefined) {
-        res.render("index", {
-          msg: "No File uploaded"
-        });
-      } else {
-        // Getting data from Google Vision API
-        console.log(req.file.filename);
+  console.log(global.loggedInUser);
 
-        var url =
-          "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCxQPGs4zmsYOnLl48SndoEIH9PoDpl_HU";
-        var data = {
-          requests: [
-            {
-              image: {
-                source: {
-                  imageUri:
-                    "https://image.ibb.co/jCtjWz/Whats_App_Image_2018_09_28_at_2_10_52_AM.jpg"
-                }
-              },
-              features: [
-                {
-                  type: "TEXT_DETECTION"
-                }
-              ]
-            }
-          ]
+  upload(req, res, err => {
+    if (err) {
+      res.render("error", { msg: err });
+    } else {
+      if (req.file == undefined) {
+        res.render("home");
+      } else {
+        console.log(req.file.filename);
+        var mockData = {
+          fname: "Alex",
+          lname: "Johnson",
+          email: "ajohn@xyz.com",
+          contact: "+91 7632 234 234",
+          website: "XYZ Enterprises"
         };
-        fetch(url, { method: "POST", body: JSON.stringify(data) })
-          .then(res => res.json())
-          .then(json => {
-            // console.log(JSON.stringify(json));
-            let resp = JSON.stringify(json);
-            console.log(resp.responses);
-            res.render("index", {
-              msg: "file uploaded",
-              file: `uploads/${req.file.filename}`
-              //   text: JSON.parse(json)
-            });
-          });
+        res.redirect("createlead");
+        // res.render("createlead", { title: "Create Lead", lead: mockData });
       }
     }
   });
+});
+
+app.post("/createlead", (req, res) => {
+  console.log(req.body);
+  res.render("success");
 });
 
 const port = process.env.PORT || 3000;
