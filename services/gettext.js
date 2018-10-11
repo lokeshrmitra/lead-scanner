@@ -1,7 +1,8 @@
 const request = require("request");
 
 // Replace <Subscription Key> with your valid subscription key.
-const subscriptionKey = "b51ecf15779c418195a1824f9f98d64d";
+const subscriptionKey =
+  process.env.TEXT_ANALYTICS_KEY1 || process.env.TEXT_ANALYTICS_KEY2;
 
 // You must use the same location in your REST call as you used to get your
 // subscription keys. For example, if you got your subscription keys from

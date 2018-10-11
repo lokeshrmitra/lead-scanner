@@ -2,7 +2,7 @@ const request = require("request");
 const fs = require("fs");
 
 // Replace <Subscription Key> with your valid subscription key.
-const subscriptionKey = "7b8b9299e32b49afbafa4a2cd075731c";
+const subscriptionKey = process.env.VISION_KEY_1 || process.env.VISION_KEY_2;
 
 // You must use the same location in your REST call as you used to get your
 // subscription keys. For example, if you got your subscription keys from
