@@ -1,14 +1,8 @@
 const request = require("request");
 const fs = require("fs");
+const path = require("path");
 
-// Replace <Subscription Key> with your valid subscription key.
 const subscriptionKey = process.env.VISION_KEY_1 || process.env.VISION_KEY_2;
-
-// You must use the same location in your REST call as you used to get your
-// subscription keys. For example, if you got your subscription keys from
-// westus, replace "westcentralus" in the URL below with "westus".
-const uriBase =
-  "https://centralindia.api.cognitive.microsoft.com/vision/v2.0/ocr";
 
 // Request parameters.
 const params = {
@@ -17,33 +11,43 @@ const params = {
 };
 
 const options = {
-  uri: uriBase,
+  uri: "https://centralindia.api.cognitive.microsoft.com/vision/v2.0/ocr",
   qs: params,
-  //   body: '{"url": ' + '"' + imageUrl + '"}',
-  body: fs.createReadStream("./card.jpeg"),
+  body: fs.createReadStream(
+    path.join(__dirname, "../public/uploads/card.jpeg")
+  ),
   headers: {
     "Content-Type": "application/octet-stream",
     "Ocp-Apim-Subscription-Key": subscriptionKey
   }
 };
 
-request.post(options, (error, response, body) => {
-  if (error) {
-    console.log("Error: ", error);
-    return;
-  }
-  let jsonResponse = JSON.stringify(JSON.parse(body), null, "  ");
-  console.log("JSON Response\n");
-
-  var regions = JSON.parse(body).regions;
-  var op = "";
-  regions.forEach(item => {
-    item.lines.forEach(it => {
-      it.words.forEach(i => {
-        /* console.log(i.text) */ op += i.text + " ";
+module.exports = {
+  getOCRText: () => {
+    return new Promise((resolve, reject) => {
+      console.debug("Inside OCCR");
+      request.post(options, (error, response, body) => {
+        if (error) {
+          console.debug("Error: ", error);
+          reject("Error while OCR");
+        }
+        if (response.statusCode == "200") {
+          console.debug("Inside OCCR after 200");
+          let jsonResponse = JSON.stringify(JSON.parse(body), null, "  ");
+          var regions = JSON.parse(body).regions;
+          var op = "";
+          regions.forEach(item => {
+            item.lines.forEach(it => {
+              it.words.forEach(i => {
+                op += i.text + " ";
+              });
+            });
+          });
+          resolve({ ocrText: op });
+        } else {
+          reject("Error while OCR");
+        }
       });
     });
-  });
-
-  console.log(op);
-});
+  }
+};

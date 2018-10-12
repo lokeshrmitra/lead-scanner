@@ -9,6 +9,24 @@
     <link rel="stylesheet" type="text/css" href="/assets/reset.css">
 </head>
 
+<header>
+
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a>
+
+            </li>
+            {{#if user}}
+            <li><a href="/Logout">Logout</a>
+            </li>
+            {{else}}
+            <li><a href="/login">login</a>
+            </li>
+            {{/if}}
+        </ul>
+    </nav>
+</header>
+
 <body>
     {{{body}}}
 </body>
@@ -16,6 +34,7 @@
 <footer>
 
     <h4>This is a footer</h4>
+    <h3>{{user}}</h3>
 </footer>
 
 </html>

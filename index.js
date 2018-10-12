@@ -1,10 +1,9 @@
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
-const hbs = require("express-handlebars");
 const bodyParser = require("body-parser");
-
-global.loggedInUser = { user: null };
+const hbs = require("express-handlebars");
+var session = require("express-session");
+const path = require("path");
+const multer = require("multer");
 
 //Set Storage Engine
 const storage = multer.diskStorage({
@@ -25,6 +24,14 @@ const upload = multer({
 
 const app = express();
 
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views/pages");
 
@@ -37,17 +44,11 @@ app.engine(
 );
 
 app.use(express.static(__dirname + "/public"));
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/login", (req, res) => {
-  console.log(req.body.user);
-  console.log(req.body.pwd);
-  console.log(global.loggedInUser);
-  global.loggedInUser.user = req.body.user;
-  console.log(global.loggedInUser);
-
-  res.render("home", { title: "Home", user: req.body.user });
+  req.session.user = req.body.user;
+  res.redirect("home");
 });
 
 app.get("/login", (req, res) => {
@@ -58,17 +59,48 @@ app.get("/", (req, res) => {
   res.render("home", { title: "Home" });
 });
 
+app.get("/unauthorised", (req, res) => {
+  res.render("unauthorised", { title: ":O Unauthorised" });
+});
+
+app.get("/error", (req, res) => {
+  res.render("error", { title: "Fail" });
+});
+
 app.get("/create-lead", (req, res) => {
-  res.render("createlead", { title: "Create Lead", data: "some text" });
+  var data = {
+    title: "Create Lead"
+  };
+  if (!req.query.type) data.lead = req.session.lead;
+  res.render("createlead", data);
+});
+
+app.get("/home", (req, res) => {
+  console.log(req.session.user);
+  if (req.session.user)
+    res.render("home", { title: "Home", user: req.session.user });
+  else {
+    res.redirect("login");
+  }
+});
+
+app.get("/success", (req, res) => {
+  res.render("success", { title: "Home" });
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.render("logout");
 });
 
 app.get("*", function(req, res) {
-  res.render("redirect", { title: "Dead End" });
+  if (req.session.user) res.redirect("home");
+  else {
+    res.redirect("login");
+  }
 });
 
 app.post("/upload", (req, res) => {
-  console.log(global.loggedInUser);
-
   upload(req, res, err => {
     if (err) {
       res.render("error", { msg: err });
@@ -76,24 +108,50 @@ app.post("/upload", (req, res) => {
       if (req.file == undefined) {
         res.render("home");
       } else {
-        console.log(req.file.filename);
-        var mockData = {
-          fname: "Alex",
-          lname: "Johnson",
-          email: "ajohn@xyz.com",
-          contact: "+91 7632 234 234",
-          website: "XYZ Enterprises"
-        };
-        res.redirect("createlead");
-        // res.render("createlead", { title: "Create Lead", lead: mockData });
+        const ocr = require("./services/ocr");
+        const textanalytics = require("./services/textanalytics");
+
+        //Add logic to call Microsofts OCR API & Text Analytics
+        ocr
+          .getOCRText()
+          .then(resp => {
+            console.log(resp.ocrText);
+            textanalytics
+              .analyzeText(resp.ocrText)
+              .then(response => {
+                console.log("Got response");
+                req.session.lead = response.leadDetails;
+                res.redirect("create-lead");
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     }
   });
 });
 
-app.post("/createlead", (req, res) => {
+app.post("/create-lead", (req, res) => {
+  var createlead = require("./services/createlead");
   console.log(req.body);
-  res.render("success");
+  const options = {
+    uri: "https://webto.salesforce.com/servlet/servlet.WebToLead",
+    form: {
+      oid: process.env.OID,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      company: req.body.company,
+      city: req.body.city,
+      state: req.body.state,
+      mobile: req.body.mobile
+    }
+  };
+  createlead.create(options, res);
 });
 
 const port = process.env.PORT || 3000;

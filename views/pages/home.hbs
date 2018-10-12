@@ -2,7 +2,11 @@
 <h4>Please upload the image of business card you want to scan</h4>
 
 <form action="/upload" method="POST" enctype="multipart/form-data">
-    <label for="bcard">Business Card</label>
-    <input type="file" id="bcard" name="bcard" accept="image/png, image/jpeg" />
-    <button type="submit"></button>
+    <div class="form-group">
+        <label for="bcard">Business Card</label>
+        <input type="file" id="bcard" name="bcard" accept="image/png, image/jpeg" />
+    </div>
+    <button type="submit">Upload</button>
 </form>
+
+<button type="button"><a href="/create-lead?type=manual">Enter Details Manually</a></button>
