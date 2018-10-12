@@ -10,20 +10,19 @@ const params = {
   detectOrientation: "true"
 };
 
-const options = {
-  uri: "https://centralindia.api.cognitive.microsoft.com/vision/v2.0/ocr",
-  qs: params,
-  body: fs.createReadStream(
-    path.join(__dirname, "../public/uploads/card.jpeg")
-  ),
-  headers: {
-    "Content-Type": "application/octet-stream",
-    "Ocp-Apim-Subscription-Key": subscriptionKey
-  }
-};
-
 module.exports = {
-  getOCRText: () => {
+  getOCRText: fileName => {
+    const options = {
+      uri: "https://centralindia.api.cognitive.microsoft.com/vision/v2.0/ocr",
+      qs: params,
+      body: fs.createReadStream(
+        path.join(__dirname, "../public/uploads/", fileName)
+      ),
+      headers: {
+        "Content-Type": "application/octet-stream",
+        "Ocp-Apim-Subscription-Key": subscriptionKey
+      }
+    };
     return new Promise((resolve, reject) => {
       console.debug("Inside OCCR");
       request.post(options, (error, response, body) => {

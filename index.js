@@ -9,10 +9,7 @@ const multer = require("multer");
 const storage = multer.diskStorage({
   destination: "./public/uploads",
   filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+    cb(null, req.session.user + ".jpeg");
   }
 });
 
@@ -113,7 +110,7 @@ app.post("/upload", (req, res) => {
 
         //Add logic to call Microsofts OCR API & Text Analytics
         ocr
-          .getOCRText()
+          .getOCRText(req.session.user + ".jpeg")
           .then(resp => {
             console.log(resp.ocrText);
             textanalytics
@@ -129,6 +126,7 @@ app.post("/upload", (req, res) => {
           })
           .catch(err => {
             console.log(err);
+            res.redirect("error");
           });
       }
     }
