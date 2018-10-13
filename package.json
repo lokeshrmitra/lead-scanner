@@ -1,5 +1,5 @@
 {
-  "name": "scan-to-lead",
+  "name": "lead-scanner",
   "version": "1.0.0",
   "description": "An app that scans business cards to create leads in Salesforce",
   "main": "index.js",
