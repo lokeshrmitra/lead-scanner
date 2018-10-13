@@ -6,35 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
-    <link rel="stylesheet" type="text/css" href="/assets/reset.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
+    {{!--
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css"> --}}
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 </head>
 
-<header>
-
-    <nav>
-        <ul>
-            <li><a href="/home">Home</a>
-
-            </li>
-            {{#if user}}
-            <li><a href="/Logout">Logout</a>
-            </li>
-            {{else}}
-            <li><a href="/login">login</a>
-            </li>
-            {{/if}}
-        </ul>
-    </nav>
-</header>
-
 <body>
+    <header>
+
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a>
+
+                </li>
+                {{#if user}}
+                <li><a href="/Logout">Logout</a>
+                </li>
+                {{else}}
+                <li><a href="/login">login</a>
+                </li>
+                {{/if}}
+            </ul>
+        </nav>
+    </header>
     {{{body}}}
+    <footer>
+
+        <h4>This is a footer</h4>
+        <h3>{{user}}</h3>
+    </footer>
 </body>
-
-<footer>
-
-    <h4>This is a footer</h4>
-    <h3>{{user}}</h3>
-</footer>
 
 </html>
