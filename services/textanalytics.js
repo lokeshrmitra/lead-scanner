@@ -44,15 +44,28 @@ module.exports = {
           };
           var entities = JSON.parse(body).Documents[0].Entities;
           entities.forEach(item => {
-            if (item.Type == "Person") {
-              leadDetails.first_name = item.Name;
-              leadDetails.last_name = item.Name;
-            } else if (item.Type == "Email") {
-              leadDetails.email = item.Name;
-            } else if (item.Type == "Organization") {
-              leadDetails.company = item.Name;
-            } else if (item.Type == "Location") {
-              leadDetails.state = item.Name;
+            let type = item.Type;
+            let val = item.Name;
+            val = val.replace(/\s?\|\s+/g, " "); //Removes Garbage Delimiters
+            val = val.trim(); //Trims to remove any extra whitespace
+            if (type == "Person") {
+              if (leadDetails.first_name == "") {
+                leadDetails.first_name = val;
+              } else {
+                leadDetails.last_name += val;
+              }
+            } else if (type == "Email") {
+              leadDetails.email = val;
+            } else if (type == "Quantity" && val.length >= 10) {
+              if (leadDetails.mobile == "") leadDetails.mobile = val;
+            } else if (type == "Organization") {
+              leadDetails.company += val;
+            } else if (type == "Location") {
+              if (leadDetails.city == "") {
+                leadDetails.city = val;
+              } else {
+                leadDetails.state += " " + val;
+              }
             }
           });
           resolve({ leadDetails });

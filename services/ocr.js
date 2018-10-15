@@ -42,6 +42,9 @@ module.exports = {
               });
             });
           });
+          op = op.replace(/["'\(\)-]/g, ""); //Removes garbage characters
+          op = op.replace(/(\d)\s+(?=\d)/g, "$1"); //Removes spaces between any two digit groups
+          op = op.replace(/\s/g, " | "); //Adds | as delimiter
           resolve({ ocrText: op });
         } else {
           reject("Error while OCR");
