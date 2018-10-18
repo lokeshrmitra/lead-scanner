@@ -1,31 +1,34 @@
-<form action="create-lead" method="post">
-    <div class="form-group">
-        <label for="first_name">First Name: </label>
-        <input type="text" name="first_name" value="{{lead.first_name}}">
-    </div>
-    <div class="form-group">
-        <label for="last_name">Last Name: </label>
-        <input type="text" name="last_name" value="{{lead.last_name}}">
-    </div>
-    <div class="form-group">
-        <label for="email">Email: </label>
-        <input type="email" name="email" value="{{lead.email}}">
-    </div>
-    <div class="form-group">
-        <label for="mobile">Mobile: </label>
-        <input type="tel" name="mobile" value="{{lead.mobile}}">
-    </div>
-    <div class="form-group">
-        <label for="company">Company: </label>
-        <input type="text" name="company" value="{{lead.company}}">
-    </div>
-    <div class="form-group">
-        <label for="city">City: </label>
-        <input type="text" name="city" value="{{lead.city}}">
-    </div>
-    <div class="form-group">
-        <label for="state">State: </label>
-        <input type="text" name="state" value="{{lead.state}}">
-    </div>
-    <button type="submit">Create Lead</button>
-</form>
+<div class="well">
+    <form role="form" action="create-lead" method="post">
+        <div class="form-group row">
+            <label class="col-xs-4" for="first_name">First Name: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="first_name" value="{{lead.first_name}}">
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-4" for="last_name">Last Name: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="last_name" value="{{lead.last_name}}">
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-4" for="email">Email: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="email" name="email" value="{{lead.email}}">
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-4" for="mobile">Mobile: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="tel" name="mobile" value="{{lead.mobile}}">
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-4" for="company">Company: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="company" value="{{lead.company}}">
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-4" for="city">City: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="city" value="{{lead.city}}">
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-4" for="state">State: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="state" value="{{lead.state}}">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block-sm">Create Lead</button>
+    </form>
+</div>

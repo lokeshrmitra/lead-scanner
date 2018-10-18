@@ -1,12 +1,16 @@
-<h1>Hello {{user}}</h1>
-<h4>Please upload the image of business card you want to scan</h4>
+<h1 style="text-align: center">Hello {{user}}</h1>
+<div class="well" style="text-align: center">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="bcard">Please scan/upload the image of business card you want to scan</label>
+            <input class="form-control-alt" type="file" name="bcard" id="bcard" accept="image/png, image/jpeg">
+            <p class="help-block">Only jpeg/png. Max File Size 10Mb</p>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block-sm"><i class="fa fa-upload"></i> Upload</button>
+    </form>
 
-<form action="/upload" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="bcard">Business Card</label>
-        <input type="file" id="bcard" name="bcard" accept="image/png, image/jpeg" />
-    </div>
-    <button type="submit">Upload</button>
-</form>
+    <h1 style="text-align: center">OR</h1>
 
-<button type="button"><a href="/create-lead?type=manual">Enter Details Manually</a></button>
+    <button class="btn btn-primary btn-block-sm" type="button"><a style="color: white" href="/create-lead?type=manual">Enter
+            Lead Details</a></button>
+</div>

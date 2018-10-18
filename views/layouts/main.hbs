@@ -6,37 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
-    <link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
-    {{!--
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css"> --}}
+    <link href="https://www.principalcdn.com/css/horizon/v2/horizon.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-    <header>
-
-        <nav>
-            <ul>
-                <li><a href="/home">Home</a>
-
-                </li>
-                {{#if user}}
-                <li><a href="/Logout">Logout</a>
-                </li>
-                {{else}}
-                <li><a href="/login">login</a>
-                </li>
-                {{/if}}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <ul class="nav navbar-nav row">
+                <li class="col-xs-12"><a href="#" class="web-logo">Lead Scanner</a></li>
+                <li class="nav-btn col-xs-4"><a href="home">HOME</a></li>
+                <li class="nav-btn col-xs-4"><a href="login">LOGIN</a></li>
+                <li class="nav-btn col-xs-4"><a href="logout">LOGOUT</a></li>
             </ul>
-        </nav>
-    </header>
-    {{{body}}}
-    <footer>
+        </div><!-- /.container-fluid -->
+    </nav>
+    <main class="container">
+        {{{body}}}
+    </main>
 
-        <h4>This is a footer</h4>
-        <h3>{{user}}</h3>
-    </footer>
 </body>
+<footer>
+    <h4 style="color: white"><strong>Made with <i style="color: red" class="fa fa-heart"></i></strong></h4>
+</footer>
 
 </html>
