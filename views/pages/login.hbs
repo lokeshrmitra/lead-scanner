@@ -1,13 +1,26 @@
 <div class="well">
-    <form action="login" method="post">
+    <form action="login" method="post" onsubmit="return validate(this)">
         <div class="form-group">
             <label for="user">Username: </label>
-            <input type="text" name="user" class="form-control" placeholder="Enter Username">
+            <input type="text" name="user" id="name" class="form-control" placeholder="Enter Username">
         </div>
         <div class="form-group">
             <label for="pwd">Password: </label>
-            <input type="password" name="pwd" class="form-control" placeholder="Enter Password">
+            <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Enter Password">
         </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+        <button type="submit" class="btn">Login</button>
     </form>
 </div>
+
+<script>
+    function validate(form) {
+        var uname = document.getElementById('name').value;
+        var pwd = document.getElementById('pwd').value;
+        if (uname.length >= 7 && pwd.length >= 8) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>

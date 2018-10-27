@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const hbs = require("express-handlebars");
 var session = require("express-session");
-const path = require("path");
 const multer = require("multer");
 
 //Set Storage Engine
@@ -21,6 +20,7 @@ const upload = multer({
 
 const app = express();
 
+//Express session middleware
 app.use(
   session({
     secret: "keyboard cat",
@@ -43,58 +43,56 @@ app.engine(
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post("/login", (req, res) => {
-  req.session.user = req.body.user;
-  res.redirect("home");
+// Custom middleware to check user
+var authenticator = (req, res, next) => {
+  if (
+    !req.session.user &&
+    req.path != "/login" &&
+    req.path != "/logout" &&
+    req.path != "/"
+  ) {
+    res.render("login", { title: "Login" });
+  } else next();
+};
+
+app.use(authenticator);
+
+app.get("/", (req, res) => {
+  if (!req.session.user) res.render("splash", { layout: false });
+  else res.redirect("home");
 });
 
 app.get("/login", (req, res) => {
   res.render("login", { title: "Login" });
 });
 
-app.get("/", (req, res) => {
-  res.render("home", { title: "Home" });
-});
+app.post("/login", (req, res) => {
+  var valid_users = JSON.parse(process.env.VALID_USERS);
+  valid_users.forEach(element => {
+    if (
+      element.uid == req.body.user.toUpperCase() &&
+      req.body.pwd == element.pwd
+    ) {
+      req.session.user = req.body.user;
+      req.session.uname = element.uname;
+    }
+  });
 
-app.get("/unauthorised", (req, res) => {
-  res.render("unauthorised", { title: ":O Unauthorised" });
-});
-
-app.get("/error", (req, res) => {
-  res.render("error", { title: "Fail" });
+  if (!req.session.user) res.redirect("login");
+  else res.redirect("home");
 });
 
 app.get("/create-lead", (req, res) => {
   var data = {
-    title: "Create Lead"
+    title: "Create Lead",
+    advisor: req.session.user.toUpperCase()
   };
   if (!req.query.type) data.lead = req.session.lead;
   res.render("createlead", data);
 });
 
 app.get("/home", (req, res) => {
-  console.log(req.session.user);
-  if (req.session.user)
-    res.render("home", { title: "Home", user: req.session.user });
-  else {
-    res.redirect("login");
-  }
-});
-
-app.get("/success", (req, res) => {
-  res.render("success", { title: "Home" });
-});
-
-app.get("/logout", (req, res) => {
-  req.session.destroy();
-  res.render("logout");
-});
-
-app.get("*", function(req, res) {
-  if (req.session.user) res.redirect("home");
-  else {
-    res.redirect("login");
-  }
+  res.render("home", { title: "Home", uname: req.session.uname });
 });
 
 app.post("/upload", (req, res) => {
@@ -135,7 +133,7 @@ app.post("/upload", (req, res) => {
 
 app.post("/create-lead", (req, res) => {
   var createlead = require("./services/createlead");
-  console.log(req.body);
+  // console.log(req.body);
   const options = {
     uri: "https://webto.salesforce.com/servlet/servlet.WebToLead",
     form: {
@@ -150,6 +148,25 @@ app.post("/create-lead", (req, res) => {
     }
   };
   createlead.create(options, res);
+});
+
+//Misc Routes
+app.get("/success", (req, res) => {
+  res.render("success", { title: "Lead Created" });
+});
+
+app.get("/error", (req, res) => {
+  res.render("error", { title: "Oops ;(" });
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.render("logout", { title: "You've been logged out." });
+});
+
+// Default route for showing 404 page
+app.get("*", function(req, res) {
+  res.render("404", { title: "Page Not Found" });
 });
 
 const port = process.env.PORT || 3000;

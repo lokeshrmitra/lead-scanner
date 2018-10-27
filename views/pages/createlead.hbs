@@ -1,12 +1,17 @@
 <div class="well">
-    <form role="form" action="create-lead" method="post">
+    <form role="form" action="create-lead" method="post" onsubmit="return validate(this)">
         <div class="form-group row">
-            <label class="col-xs-4" for="first_name">First Name: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="first_name" value="{{lead.first_name}}">
+            <label class="col-xs-4" for="advisor_name">Advisor: </label>
+            <input readonly class="col-xs-8 form-control-alt input-sm" type="text" name="advisor_name" value="{{advisor}}">
         </div>
         <div class="form-group row">
+            <label class="col-xs-4" for="first_name">First Name: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="first_name" id="first_name" value="{{lead.first_name}}">
+        </div>
+        <button class="swap" type="button" id="1" onclick="swap(this)"> Swap </button>
+        <div class="form-group row">
             <label class="col-xs-4" for="last_name">Last Name: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="last_name" value="{{lead.last_name}}">
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="last_name" id="last_name" value="{{lead.last_name}}">
         </div>
         <div class="form-group row">
             <label class="col-xs-4" for="email">Email: </label>
@@ -14,7 +19,12 @@
         </div>
         <div class="form-group row">
             <label class="col-xs-4" for="mobile">Mobile: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="tel" name="mobile" value="{{lead.mobile}}">
+            <input class="col-xs-8 form-control-alt input-sm" type="tel" name="mobile" id="mobile" value="{{lead.mobile}}">
+        </div>
+        <button class="swap" type="button" id="2" onclick="swap(this)"> Swap </button>
+        <div class="form-group row">
+            <label class="col-xs-4" for="work">Work: </label>
+            <input class="col-xs-8 form-control-alt input-sm" type="tel" name="work" id="work" value="This will be office no.">
         </div>
         <div class="form-group row">
             <label class="col-xs-4" for="company">Company: </label>
@@ -22,13 +32,34 @@
         </div>
         <div class="form-group row">
             <label class="col-xs-4" for="city">City: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="city" value="{{lead.city}}">
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="city" id="city" value="{{lead.city}}">
         </div>
+        <button class="swap" type="button" id="3" onclick="swap(this)"> Swap </button>
         <div class="form-group row">
             <label class="col-xs-4" for="state">State: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="state" value="{{lead.state}}">
+            <input class="col-xs-8 form-control-alt input-sm" type="text" name="state" id="state" value="{{lead.state}}">
         </div>
 
         <button type="submit" class="btn btn-primary btn-lg btn-block-sm">Create Lead</button>
     </form>
 </div>
+
+<script>
+    function validate(form) {
+        // Will add some basic validation;
+        return true;
+    }
+
+    function swap(e) {
+        var firstElem = e.id == 1 ? document.getElementById('first_name') :
+            e.id == 2 ? document.getElementById('mobile')
+                : document.getElementById('city');
+        var secondElem = e.id == 1 ? document.getElementById('last_name') :
+            e.id == 2 ? document.getElementById('work')
+                : document.getElementById('state');
+        var temp = firstElem.value;
+        firstElem.value = secondElem.value;
+        secondElem.value = temp;
+    }
+
+</script>

@@ -1,4 +1,4 @@
-<h1 style="text-align: center">Hello {{user}}</h1>
+<h1 style="text-align: center">Hello, {{uname}} !</h1>
 <div class="well" style="text-align: center">
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <div class="form-group">
@@ -6,11 +6,11 @@
             <input class="form-control-alt" type="file" name="bcard" id="bcard" accept="image/png, image/jpeg">
             <p class="help-block">Only jpeg/png. Max File Size 10Mb</p>
         </div>
-        <button type="submit" class="btn btn-primary btn-block-sm"><i class="fa fa-upload"></i> Upload</button>
+        <button type="submit" class="btn"><i class="fa fa-upload"></i> Upload</button>
     </form>
 
     <h1 style="text-align: center">OR</h1>
 
-    <button class="btn btn-primary btn-block-sm" type="button"><a style="color: white" href="/create-lead?type=manual">Enter
-            Lead Details</a></button>
+    <button type="button" class="btn">
+        <a href="/create-lead?type=manual">Enter Lead Details</a> </button>
 </div>
