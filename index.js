@@ -138,13 +138,15 @@ app.post("/create-lead", (req, res) => {
     uri: "https://webto.salesforce.com/servlet/servlet.WebToLead",
     form: {
       oid: process.env.OID,
+      "00N6F00000Skctv": req.body.advisor,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email,
       company: req.body.company,
       city: req.body.city,
       state: req.body.state,
-      mobile: req.body.mobile
+      mobile: req.body.mobile,
+      phone: req.body.phone
     }
   };
   createlead.create(options, res);

@@ -1,8 +1,8 @@
 <div class="well">
     <form role="form" action="create-lead" method="post" onsubmit="return validate(this)">
         <div class="form-group row">
-            <label class="col-xs-4" for="advisor_name">Advisor: </label>
-            <input readonly class="col-xs-8 form-control-alt input-sm" type="text" name="advisor_name" value="{{advisor}}">
+            <label class="col-xs-4" for="advisor">Advisor: </label>
+            <input readonly id="advisor" maxlength="40" name="advisor" size="20" type="text" value="{{advisor}}" />
         </div>
         <div class="form-group row">
             <label class="col-xs-4" for="first_name">First Name: </label>
@@ -23,8 +23,8 @@
         </div>
         <button class="swap" type="button" id="2" onclick="swap(this)"> Swap </button>
         <div class="form-group row">
-            <label class="col-xs-4" for="work">Work: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="tel" name="work" id="work" value="This will be office no.">
+            <label class="col-xs-4" for="phone">Phone: </label>
+            <input id="phone" maxlength="40" name="phone" id="phone" size="20" type="tel" value="{{lead.phone}}" />
         </div>
         <div class="form-group row">
             <label class="col-xs-4" for="company">Company: </label>
@@ -55,7 +55,7 @@
             e.id == 2 ? document.getElementById('mobile')
                 : document.getElementById('city');
         var secondElem = e.id == 1 ? document.getElementById('last_name') :
-            e.id == 2 ? document.getElementById('work')
+            e.id == 2 ? document.getElementById('phone')
                 : document.getElementById('state');
         var temp = firstElem.value;
         firstElem.value = secondElem.value;
