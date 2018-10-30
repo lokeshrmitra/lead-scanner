@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { title: "Login" });
+  res.render("login", { title: "Login", layout: false });
 });
 
 app.post("/login", (req, res) => {
