@@ -1,23 +1,13 @@
-/* body {
-  color: #464646;
-} */
-
 body {
   background: yellow;
-  color: #464646;
-
-  /* Magenta #f81b84, beige #f2eee2, ellow #f5ce28, cyan #43c0f6 */
+  color: black;
 }
 
 footer {
   position: fixed;
-  line-height: 1em;
   bottom: 0px;
-  left: 0px;
-  right: 0px;
-  margin-bottom: 0px;
+  width: 100%;
   text-align: center;
-  border-top: solid 1px lightgray;
 }
 
 .stylised {
@@ -70,30 +60,24 @@ label {
 }
 
 .form-group {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .btn {
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  vertical-align: middle;
+  color: yellow;
+  background: black;
+  border-radius: 1em;
+  font-weight: 900;
   width: 100%;
-  border: 1px solid transparent;
+  text-transform: uppercase;
+
+  display: block;
+  text-align: center;
   padding: 0.5em;
-  margin-top: 1em;
+  /* margin-top: 1em;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
-  border: #464646 solid 1px;
-  text-transform: uppercase;
-  background: yellow;
-}
-
-.btn > a {
-  color: #464646;
-  text-decoration: none;
-  display: block;
+  border: #464646 solid 1px; */
 }
 
 label,
@@ -103,9 +87,43 @@ button {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.login-btn {
-  border-radius: 1em;
-  color: yellow;
-  background: black;
-  font-weight: 900;
+/* LOGIN Page CSS */
+
+.login-web-logo {
+  font-size: 3.25em;
+  text-align: center;
+  margin-top: 3.5em;
+  margin-bottom: 2em;
+}
+
+.login {
+  margin: auto;
+  height: 40vh;
+  padding: 0.5em;
+  text-align: center;
+  font-size: 1.25em;
+}
+
+/* ::placeholder {
+  color: black;
+  opacity: 0.5;
+} */
+
+.login-btn:focus {
+  outline: none;
+}
+
+.fa {
+  font-size: 1.25em;
+  /* border-bottom: solid 0.5px black; */
+  padding: 0.25em;
+}
+.login input {
+  width: 85%;
+  background: none;
+  border: none;
+}
+
+.login .form-group {
+  border-bottom: solid 0.15em black;
 }
