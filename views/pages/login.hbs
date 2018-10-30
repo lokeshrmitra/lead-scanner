@@ -1,14 +1,35 @@
+<style>
+    .well {
+        margin: 25vh auto;
+        height: 30vh;
+        padding: 1.5em;
+        text-align: center
+        }
+
+    .well input{
+        width: 85%;
+        background: none;
+        border: none;
+        border-bottom: solid 1px black;
+    }
+    .fa{
+        font-size: 1.25em;
+    }
+
+    .form-group{
+        margin-bottom: 1.5em;
+    }
+</style>
+
 <div class="well">
     <form action="login" method="post" onsubmit="return validate(this)">
         <div class="form-group">
-            <label for="user">Username: </label>
-            <input type="text" name="user" id="name" class="form-control" placeholder="Enter Username">
+            <i class="fa fa-user"></i> <input type="text" name="user" id="name" class="form-control" placeholder="Enter Username">
         </div>
         <div class="form-group">
-            <label for="pwd">Password: </label>
-            <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Enter Password">
+            <i class="fa fa-lock"></i> <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Enter Password">
         </div>
-        <button type="submit" class="btn">Login</button>
+        <button type="submit" class="btn login-btn">Login</button>
     </form>
 </div>
 

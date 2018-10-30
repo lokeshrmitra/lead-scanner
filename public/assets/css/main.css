@@ -1,5 +1,12 @@
-body {
+/* body {
   color: #464646;
+} */
+
+body {
+  background: yellow;
+  color: #464646;
+
+  /* Magenta #f81b84, beige #f2eee2, ellow #f5ce28, cyan #43c0f6 */
 }
 
 footer {
@@ -51,25 +58,10 @@ nav a {
   width: 40vw;
   text-align: center;
 }
-/* .web-logo {
-  display: block !important;
-} */
-
-/* 
-.well {
-  text-align: center;
-}
-h4 {
-  font-size: 1.4em;
-} */
 
 label,
 input {
   display: inline-block;
-}
-input {
-  width: auto;
-  border: solid 2px #464646;
 }
 
 label {
@@ -95,10 +87,25 @@ label {
   border-radius: 0.25rem;
   border: #464646 solid 1px;
   text-transform: uppercase;
+  background: yellow;
 }
 
 .btn > a {
   color: #464646;
   text-decoration: none;
   display: block;
+}
+
+label,
+input,
+button {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.login-btn {
+  border-radius: 1em;
+  color: yellow;
+  background: black;
+  font-weight: 900;
 }
