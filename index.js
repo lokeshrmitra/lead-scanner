@@ -118,12 +118,13 @@ app.post("/upload", (req, res) => {
       } else {
         const ocr = require("./services/ocr");
         const textanalytics = require("./services/textanalytics");
-
+        const params = {
+          mode: req.query.mode
+        };
         //Add logic to call Microsofts OCR API & Text Analytics
-        ocr
-          .getOCRText(req.session.user + ".jpeg")
+        var ocrResponse = ocr.getOCRText(req.session.user + ".jpeg", params);
+        ocrResponse
           .then(resp => {
-            console.log(resp.ocrText);
             textanalytics
               .analyzeText(resp.ocrText)
               .then(response => {

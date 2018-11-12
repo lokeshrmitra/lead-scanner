@@ -1,4 +1,5 @@
 const request = require("request");
+const states = require("../public/assets/state_hash.json");
 
 const subscriptionKey =
   process.env.TEXT_ANALYTICS_KEY1 || process.env.TEXT_ANALYTICS_KEY2;
@@ -37,10 +38,11 @@ module.exports = {
             first_name: "",
             last_name: "",
             email: "",
+            mobile: "",
+            phone: "",
             company: "",
             city: "",
-            state: "",
-            mobile: ""
+            state: ""
           };
           var entities = JSON.parse(body).Documents[0].Entities;
           entities.forEach(item => {
@@ -58,14 +60,16 @@ module.exports = {
               leadDetails.email = val;
             } else if (type == "Quantity" && val.length >= 10) {
               if (leadDetails.mobile == "") leadDetails.mobile = val;
+              else leadDetails.phone = val;
             } else if (type == "Organization") {
               leadDetails.company += val;
             } else if (type == "Location") {
-              if (leadDetails.city == "") {
-                leadDetails.city = val;
-              } else {
-                leadDetails.state += " " + val;
-              }
+              if (
+                Object.keys(states).indexOf(val.toUpperCase()) != -1 ||
+                Object.values(states).indexOf(val.toUpperCase()) != -1
+              )
+                leadDetails.state += val;
+              else leadDetails.city += val;
             }
           });
           resolve({ leadDetails });

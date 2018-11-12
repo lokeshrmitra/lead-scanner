@@ -222,3 +222,8 @@ example {
     font-size: 3.5rem;
   }
 }
+
+.heart {
+  color: crimson;
+  font-size: large;
+}

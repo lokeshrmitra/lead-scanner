@@ -1,17 +1,14 @@
 <h1 style="text-align: center">Hello, {{uname}}
     <div class="input-types">
-        <div class="camera-ip"><button>
-                <a href="/upload-image">Use your device's camera to scan printed or handwritten cards.
-                </a>
-            </button>
+        <div class="camera-ip">
+            <a href="/upload-image" class="link-btn">Use your device's camera to scan printed or handwritten cards.
+            </a>
         </div>
         <h1 style="text-align: center">OR</h1>
-        <div class="voice-ip"><button>
-                <a href="/listen">Speak out the lead details</a>
-            </button>
+        <div class="voice-ip">
+            <a href="/listen" class="link-btn">Speak out the lead details</a>
+
         </div>
         <h1 style="text-align: center">OR</h1>
-        <form action="/create-lead?type=manual" method="get">
-            <button class="btn" type="submit">Enter Lead Details</button>
-        </form>
+        <a href="/create-lead?type=manual" class="link-btn">Enter Lead Details</a>
     </div>

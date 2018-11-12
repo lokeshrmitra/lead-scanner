@@ -4,5 +4,7 @@
         <input class="form-control-alt" type="file" name="bcard" id="bcard" accept="image/png, image/jpeg">
         <p class="help-block">Only jpeg/png. Max File Size 10Mb</p>
     </div>
-    <button type="submit" class="btn"><i class="fa fa-upload"></i> Upload</button>
+    <button type="submit" name="printed" formaction="/upload?mode=Printed">This is a Printed Business Card</button>
+    <button type="submit" name="hand-written" formaction="/upload?mode=Handwritten">This is a handwritten note/card</button>
+
 </form>

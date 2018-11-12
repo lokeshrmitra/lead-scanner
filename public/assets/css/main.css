@@ -125,3 +125,8 @@ nav ul li a {
   outline: none;
   cursor: pointer;
 }
+
+.heart {
+  color: crimson;
+  font-size: large;
+}
