@@ -51,7 +51,7 @@ var authenticator = (req, res, next) => {
     req.path != "/logout" &&
     req.path != "/"
   ) {
-    res.render("login", { title: "Login" });
+    res.render("login", { title: "Login", layout: false });
   } else next();
 };
 
@@ -80,6 +80,19 @@ app.post("/login", (req, res) => {
 
   if (!req.session.user) res.redirect("login");
   else res.redirect("home");
+});
+
+app.get("/listen", (req, res) => {
+  res.render("listen", { title: "Speak" });
+});
+
+app.post("/listen", (req, res) => {
+  console.log(req.body);
+  res.render("listen", { title: "Speak" });
+});
+
+app.get("/upload-image", (req, res) => {
+  res.render("upload-image", { title: "Image" });
 });
 
 app.get("/create-lead", (req, res) => {
