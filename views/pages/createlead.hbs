@@ -1,46 +1,46 @@
 <div class="well">
     <form role="form" action="create-lead" method="post" onsubmit="return validate(this)">
-        <div class="form-group row">
-            <label class="col-xs-4" for="advisor">Advisor: </label>
+        <div class="form-group">
+            <label for="advisor">Advisor: </label>
             <input readonly id="advisor" maxlength="40" name="advisor" size="20" type="text" value="{{advisor}}" />
         </div>
-        <div class="form-group row">
-            <label class="col-xs-4" for="first_name">First Name: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="first_name" id="first_name" value="{{lead.first_name}}">
+        <div class="form-group">
+            <label for="first_name">First Name: </label>
+            <input class="form-control-alt input-sm" type="text" name="first_name" id="first_name" value="{{lead.first_name}}">
         </div>
-        <button class="swap" type="button" id="1" onclick="swap(this)"> Swap </button>
-        <div class="form-group row">
-            <label class="col-xs-4" for="last_name">Last Name: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="last_name" id="last_name" value="{{lead.last_name}}">
+        <button class="swap" type="button" id="1" onclick="swap(this)"> ⇌ </button>
+        <div class="form-group">
+            <label for="last_name">Last Name: </label>
+            <input class="form-control-alt input-sm" type="text" name="last_name" id="last_name" value="{{lead.last_name}}">
         </div>
-        <div class="form-group row">
-            <label class="col-xs-4" for="email">Email: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="email" name="email" value="{{lead.email}}">
+        <div class="form-group">
+            <label for="email">Email: </label>
+            <input class="form-control-alt input-sm" type="email" name="email" value="{{lead.email}}">
         </div>
-        <div class="form-group row">
-            <label class="col-xs-4" for="mobile">Mobile: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="tel" name="mobile" id="mobile" value="{{lead.mobile}}">
+        <div class="form-group">
+            <label for="mobile">Mobile: </label>
+            <input class="form-control-alt input-sm" type="tel" name="mobile" id="mobile" value="{{lead.mobile}}">
         </div>
-        <button class="swap" type="button" id="2" onclick="swap(this)"> Swap </button>
-        <div class="form-group row">
-            <label class="col-xs-4" for="phone">Phone: </label>
+        <button class="swap" type="button" id="2" onclick="swap(this)"> ⇌ </button>
+        <div class="form-group">
+            <label for="phone">Phone: </label>
             <input id="phone" maxlength="40" name="phone" id="phone" size="20" type="tel" value="{{lead.phone}}" />
         </div>
-        <div class="form-group row">
-            <label class="col-xs-4" for="company">Company: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="company" value="{{lead.company}}">
+        <div class="form-group">
+            <label for="company">Company: </label>
+            <input class="form-control-alt input-sm" type="text" name="company" value="{{lead.company}}">
         </div>
-        <div class="form-group row">
-            <label class="col-xs-4" for="city">City: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="city" id="city" value="{{lead.city}}">
+        <div class="form-group">
+            <label for="city">City: </label>
+            <input class="form-control-alt input-sm" type="text" name="city" id="city" value="{{lead.city}}">
         </div>
-        <button class="swap" type="button" id="3" onclick="swap(this)"> Swap </button>
-        <div class="form-group row">
-            <label class="col-xs-4" for="state">State: </label>
-            <input class="col-xs-8 form-control-alt input-sm" type="text" name="state" id="state" value="{{lead.state}}">
+        <button class="swap" type="button" id="3" onclick="swap(this)"> ⇌ </button>
+        <div class="form-group">
+            <label for="state">State: </label>
+            <input class="form-control-alt input-sm" type="text" name="state" id="state" value="{{lead.state}}">
         </div>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block-sm">Create Lead</button>
+        <button type="submit" class="btn primary-btn">Create Lead</button>
     </form>
 </div>
 

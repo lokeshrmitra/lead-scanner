@@ -2,43 +2,54 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/login.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 </head>
 
 <body>
-    <main>
-        <div class="login-web-logo stylised">
-            LeadScanner
+    <main class="wrapper">
+        <div id="left">
+            <section class="login">
+                <div class="login-logo">LeadScanner</div>
+
+                <form action="login" method="post" onsubmit="return validate(this)">
+                    <div>
+                        <label for="user">Username Or Email</label>
+                        <input type="text" name="user" id="name" />
+                    </div>
+                    <div>
+                        <label for="pwd">Password</label>
+                        <input type="password" name="pwd" id="pwd" />
+                    </div>
+                    <button type="submit" class="primary-btn">Sign In</button>
+                </form>
+                <a href="">Forgot Password ?</a>
+
+                <div class="or">
+                    <hr />
+                    <span>OR</span>
+                    <hr />
+                </div>
+                <a href="" class="secondary-btn">Create an account</a>
+            </section>
+            <footer>
+                Made with <span style="color: crimson">&hearts;</span>
+            </footer>
         </div>
-        <div class="login">
-            <form action="login" method="post" onsubmit="return validate(this)">
-                <div class="form-group">
-                    <i class="fa fa-user"></i> <input type="text" name="user" id="name" class="form-control"
-                        placeholder="Enter Username">
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-lock"></i> <input type="password" name="pwd" id="pwd" class="form-control"
-                        placeholder="Enter Password">
-                </div>
-                <button type="submit" class="btn login-btn">Login</button>
-            </form>
+        <div id="right">
+            <div class="showcase">
+                <h3 class="showcase-title">
+                    An Intelligent way to scan business cards
+                </h3>
+                <button class="secondary-btn">Know More</button>
+            </div>
         </div>
     </main>
 </body>
-<footer class="stylised">
-    <h3><strong>Made with <span style="color: red">♥</span>
-        </strong> </h3>
-</footer>
 <script>
     function validate(form) {
         var uname = document.getElementById('name').value;

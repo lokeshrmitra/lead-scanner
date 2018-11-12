@@ -8,30 +8,25 @@
     <title>{{title}}</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-        crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
 </head>
 
 <body>
     <nav>
         <ul>
-            <li class="web-logo stylised">LeadScanner</li>
-            {{#if uname}}
-            <li class="nav-btn"><a href="home">HOME</a></li>
-            <li class="nav-btn"><a href="logout">LOGOUT</a></li>
-            {{/if}}
+            <li class="logo"><a href="/">LeadScanner</a></li>
+            <li><a href="home">HOME</a></li>
+            <li><a href="logout">LOGOUT</a></li>
+            <li><a href="profile">Profile</a></li>
+            <li><a href="logout">LOGOUT</a></li>
         </ul>
     </nav>
     <main class="container">
         {{{body}}}
     </main>
+    <footer>
+        Made with <span style="color: crimson">&hearts;</span>
+    </footer>
 </body>
-<footer class="stylised">
-    <h3><strong>Made with <span style="color: red">♥</span>
-        </strong> </h3>
-</footer>
 
 </html>

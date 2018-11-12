@@ -1,16 +1,17 @@
-<h1 style="text-align: center">Hello, {{uname}} !</h1>
-<div class="well" style="text-align: center">
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="bcard">Please scan/upload the image of business card you want to scan</label>
-            <input class="form-control-alt" type="file" name="bcard" id="bcard" accept="image/png, image/jpeg">
-            <p class="help-block">Only jpeg/png. Max File Size 10Mb</p>
+<h1 style="text-align: center">Hello, {{uname}}
+    <div class="input-types">
+        <div class="camera-ip"><button>
+                <a href="/upload-image">Use your device's camera to scan printed or handwritten cards.
+                </a>
+            </button>
         </div>
-        <button type="submit" class="btn"><i class="fa fa-upload"></i> Upload</button>
-    </form>
-
-    <h1 style="text-align: center">OR</h1>
-    <form action="/create-lead?type=manual" method="get">
-        <button class="btn" type="submit">Enter Lead Details</button>
-    </form>
-</div>
+        <h1 style="text-align: center">OR</h1>
+        <div class="voice-ip"><button>
+                <a href="/listen">Speak out the lead details</a>
+            </button>
+        </div>
+        <h1 style="text-align: center">OR</h1>
+        <form action="/create-lead?type=manual" method="get">
+            <button class="btn" type="submit">Enter Lead Details</button>
+        </form>
+    </div>

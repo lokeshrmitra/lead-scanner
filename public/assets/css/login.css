@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: #1f3880;
+  color: white;
+}
+
+#left,
+#right {
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+}
+
+/* Left Side Login Page */
+#left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #067df3;
+  border-right: solid 1px #5370fb;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding-bottom: 1rem;
+}
+.login form {
+  width: 80%;
+  padding-bottom: 3rem;
+}
+.login .login-logo {
+  margin-bottom: 10vh;
+  font-family: "Pacifico", cursive;
+  font-size: 4rem;
+}
+.login label {
+  line-height: 1rem;
+  font-weight: 500;
+}
+.login input {
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1.3rem;
+  width: 100%;
+  border-radius: 5px;
+  background: white;
+  border: solid 1px white;
+  color: #067df3;
+  padding: 0.5rem 1rem;
+  line-height: 1.3rem;
+  letter-spacing: 1px;
+}
+.login .secondary-btn {
+  width: 60%;
+  text-align: center;
+}
+
+.or,
+footer {
+  width: 60%;
+  text-align: center;
+}
+
+.login > a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  display: block;
+  font-size: 0.9rem;
+}
+.login .or {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+.login .or hr {
+  flex: auto;
+  border: none;
+  height: 1px;
+  background: #fff;
+  margin: 1em 0.5em;
+}
+
+footer {
+  font-size: 1rem;
+  max-width: 80%;
+  margin-top: 8.5rem;
+}
+
+/* Buttons */
+.primary-btn {
+  padding: 0.7rem 1rem;
+  height: 2.5rem;
+  display: block;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 500;
+  background: darkorange;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s ease;
+}
+.primary-btn:hover {
+  background: #ff7b39;
+}
+
+.secondary-btn {
+  padding: 0.7rem 1rem;
+  height: 2.5rem;
+  display: block;
+  border: 2px solid darkorange;
+  border-radius: 5px;
+  font-weight: 500;
+  background: none;
+  color: darkorange;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s ease;
+}
+.secondary-btn:hover {
+  color: #fff;
+  background: darkorange;
+}
+
+.login input:focus {
+  font-size: 1em;
+}
+.login > a:hover {
+  text-decoration: underline;
+}
+.login .primary-btn {
+  width: 100%;
+  font-size: 1rem;
+  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.login .secondary-btn {
+  font-size: 1rem;
+  color: white;
+  font-weight: 900;
+  border: solid 1px white;
+  padding-top: 0.6em;
+}
+.login .secondary-btn:hover {
+  background: white;
+  color: #067df3;
+}
+
+/* Right Side Showcase Area */
+#right {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("/assets/showcase.png") no-repeat center center/cover;
+}
+
+.showcase-title {
+  font-size: 2.5rem;
+  width: 100%;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.showcase .secondary-btn {
+  margin: 0 auto;
+  font-weight: 900;
+}
+
+example {
+  color: #067df3;
+  /* Light Backgriund */
+  background: #066bd2;
+  /* Dark Muted Color */
+  color: #5fa6f7;
+  /* Faded */
+}
+
+/* Media Queries */
+@media (min-width: 1200px) {
+  #left,
+  #right {
+    flex: 1;
+  }
+}
+@media (min-width: 600px) {
+  #left {
+    flex: 2;
+  }
+
+  #right {
+    flex: 4;
+  }
+}
+@media (max-width: 600px) {
+  #right {
+    display: none;
+  }
+
+  #left .login-logo {
+    font-size: 3.5rem;
+  }
+}
