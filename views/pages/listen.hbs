@@ -25,6 +25,9 @@
     // allowing us to keep recording even when the user pauses. 
     recognition.continuous = true;
 
+    //notes store temp
+    var noteContent = "";
+
     // This block is called every time the Speech APi captures a line. 
     recognition.onresult = function (event) {
 
@@ -35,17 +38,19 @@
 
         // Get a transcript of what was said.
         var transcript = event.results[current][0].transcript;
-        console.log(transcript);
-        document.getElementById('notes').value += transcript;
+
         // Add the current transcript to the contents of our Note.
         // There is a weird bug on mobile, where everything is repeated twice.
         // There is no official solution so far so we have to handle an edge case.
-        // var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+        var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+        if (!mobileRepeatBug) {
+            noteContent += transcript;
+            document.getElementById('notes').value = noteContent;
+        }
 
-        // if (!mobileRepeatBug) {
-        //     noteContent += transcript;
-        //     noteTextarea.val(noteContent);
-        // }
+        //nodemon      console.log(transcript);
+        //        document.getElementById('notes').value += transcript;
+
     };
 
     recognition.onstart = function () {

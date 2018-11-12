@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const hbs = require("express-handlebars");
 var session = require("express-session");
 const multer = require("multer");
+const ocr = require("./services/ocr");
+const textanalytics = require("./services/textanalytics");
 
 //Set Storage Engine
 const storage = multer.diskStorage({
@@ -88,7 +90,17 @@ app.get("/listen", (req, res) => {
 
 app.post("/listen", (req, res) => {
   console.log(req.body);
-  res.render("listen", { title: "Speak" });
+  textanalytics
+    .analyzeText(req.body.notes)
+    .then(response => {
+      console.log("Got response");
+      req.session.lead = response.leadDetails;
+      res.redirect("create-lead");
+    })
+    .catch(err => {
+      console.log(err);
+      res.render("listen", { title: "Speak" });
+    });
 });
 
 app.get("/upload-image", (req, res) => {
@@ -116,8 +128,6 @@ app.post("/upload", (req, res) => {
       if (req.file == undefined) {
         res.render("home");
       } else {
-        const ocr = require("./services/ocr");
-        const textanalytics = require("./services/textanalytics");
         const params = {
           mode: req.query.mode
         };
@@ -125,6 +135,7 @@ app.post("/upload", (req, res) => {
         var ocrResponse = ocr.getOCRText(req.session.user + ".jpeg", params);
         ocrResponse
           .then(resp => {
+            console.log(resp);
             textanalytics
               .analyzeText(resp.ocrText)
               .then(response => {
