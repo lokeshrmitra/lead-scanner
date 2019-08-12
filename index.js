@@ -70,6 +70,9 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
   var valid_users = JSON.parse(process.env.VALID_USERS);
+  console.log(valid_users);
+  console.log(req.body);
+  
   valid_users.forEach(element => {
     if (
       element.uid == req.body.user.toUpperCase() &&
